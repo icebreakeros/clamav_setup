@@ -1,0 +1,16 @@
+# Run the freshclam as daemon
+[Unit]
+Description = freshclam scanner
+After = network.target
+
+[Service]
+Type = forking
+ExecStart = /usr/bin/freshclam -d
+Restart = on-failure
+IOSchedulingPriority = 7
+CPUSchedulingPolicy = idle
+Nice = 19
+PrivateTmp = true
+
+[Install]
+WantedBy = multi-user.target

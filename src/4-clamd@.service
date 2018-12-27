@@ -1,0 +1,18 @@
+# Run the clamd scanner
+[Unit]
+Description = clamd scanner (%i) daemon
+After = syslog.target nss-lookup.target network.target
+
+[Service]
+Type = simple
+ExecStart = /usr/sbin/clamd --foreground=yes
+Restart = on-failure
+IOSchedulingPriority = 7
+CPUSchedulingPolicy = idle
+Nice = 19
+PrivateTmp = true
+MemoryLimit=50%
+CPUQuota=50%
+
+[Install]
+WantedBy = multi-user.target
